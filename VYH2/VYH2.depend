@@ -1,6 +1,10 @@
 # depslib dependency file v1.0
-1490925999 source:c:\users\ozant\documents\github\datastructuresh2\vyh2\main.c
-	<stdio.h>
+1491064567 source:c:\users\ozant\documents\github\datastructuresh2\vyh2\main.c
+	<stdlib.h>
 	<conio.h>
 	<stdio.h>
+
+1491064567 source:c:\users\ozant\documents\github\datastructuresh2\vyh2\untitled1.c
+	<stdio.h>
+	<stdlib.h>
 

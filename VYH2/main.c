@@ -1,5 +1,4 @@
-#include<stdio.h>
-
+#include<stdlib.h>
 #include<conio.h>
 #include<stdio.h>
 struct accounts
@@ -15,8 +14,7 @@ struct accounts
 
 struct accounts *insertUser(struct accounts *,int,char[20],char[20],int,int[20]);
 void inorder(struct accounts *);
-void postorder(struct accounts *);
-void preorder(struct accounts *);
+struct accounts *printGreater(struct accounts *);
 struct accounts *deleteUser(struct accounts *,int);
 struct accounts *contains(struct accounts *);
 struct accounts *friends(struct accounts *);
@@ -34,24 +32,24 @@ int main(void)
  char getsurname[20];
  int numoffriends;
  int getfriends[20];
-/* rear  = NULL;*/
  do
  {
   do
   {
    printf("\n 1. insertUser");
    printf("\n 2. deleteUser");
-   printf("\n 3. Inorder traversal of Binary accounts");
+   printf("\n 3. inOrder");
    printf("\n 4. Size");
    printf("\n 5. Friends");
    printf("\n 6. Contains");
    printf("\n 7. printNext");
-   printf("\n 8. Exit ");
+   printf("\n 8. printGreater");
+   printf("\n 9. Exit ");
    printf("\n\t Enter choice : ");
    scanf(" %d",&choice);
-   if(choice<1 || choice>8)
+   if(choice<1 || choice>9)
       printf("\n Invalid choice - try again");
-  }while (choice<1 || choice>8);
+  }while (choice<1 || choice>9);
   switch(choice)
   {
    case 1:
@@ -98,10 +96,14 @@ int main(void)
    case 7:
  printf("\n printNext");
  root=printNext(root);
+ break;
+   case 8:
+ printf("\n printGreater");
+ root=printGreater(root);
    default:
   printf("\n End of program ");
    } /* end of switch */
-  }while(choice !=8);
+  }while(choice !=9);
  return(0);
 }
 
@@ -159,29 +161,7 @@ int size(struct accounts* root)
    }
    return;
  }
- void postorder(struct accounts *root)
- {
-    if(root != NULL)
-   {
-     postorder(root->left);
-     postorder(root->right);
-     printf(" %d",root->key);
-   }
-   return;
- }
-
- void preorder(struct accounts *root)
- {
-    if(root != NULL)
-   {
-     printf(" %d",root->key);
-     preorder(root->left);
-     preorder(root->right);
-   }
-   return;
- }
-
- /* FUNCTION TO deleteUserE A NODE FROM A BINARY accounts */
+ /* */
  struct accounts *deleteUser(struct accounts *ptr,int x)
  {
   struct accounts *p1,*p2;
@@ -239,7 +219,7 @@ return p2;
  }
   return(ptr);
 }
-/* function to contains and replace an element in the binary accounts */
+/*  */
 struct accounts *contains(struct accounts *root)
 {
 
@@ -360,6 +340,37 @@ struct accounts *printNext(struct accounts *root)
  }
  if(ptr)
  {
+    inorder2(ptr);
+  /*for(i=0;i<ptr->numoffriends;i++){
+    printf("\n Friend %d is %d",i+1,ptr->friends[i]);
+
+  }*/
+ }
+ else
+   printf("\n Account is not exist in the system ! ",no);
+ return(root);
+}
+struct accounts *printGreater(struct accounts *root)
+{
+
+ int no,i,ino,j;
+ struct accounts *ptr;
+ ptr=root;
+ printf("\n Enter key to printNext:");
+ scanf(" %d",&no);
+ fflush(stdin);
+ while(ptr)
+ {
+  if(no>ptr->key)
+     ptr=ptr->right;
+  else if(no<ptr->key)
+     ptr=ptr->left;
+  else
+     break;
+ }
+ if(ptr)
+ {
+    ptr=ptr->right;
     inorder2(ptr);
   /*for(i=0;i<ptr->numoffriends;i++){
     printf("\n Friend %d is %d",i+1,ptr->friends[i]);
